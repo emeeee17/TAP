@@ -1,0 +1,43 @@
+/* 1. ลบสีฟ้ากากๆ ออกจากกล่องคลุม */
+
+/* 2. แต่งปุ่ม Add to Cart ของจริงให้เป็นเอฟเฟกต์กระจก (Glassmorphism) */
+
+/* 3. แก้ปัญหาเลข 10 ขาด (ขยายกล่อง Input ให้กว้างพอ) */
+
+/* 4. แต่งกล่องเลือกสี (Variant) ให้เข้ากับดีไซน์กระจก */
+
+/* 1. ตัว Section หลัก: กำหนดให้ตัดส่วนล้นเฉพาะในพื้นที่ตัวเอง */
+
+.section-popup-fixed {
+  position: relative;
+  clip-path: inset(0 0 0 0);
+  z-index: 1;
+  padding-top: calc(24px + env(safe-area-inset-top)) !important;
+  padding-bottom: calc(24px + env(safe-area-inset-bottom)) !important;
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+}
+
+.section-popup-fixed::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("../../assets/img/BGmock.jpg");
+  background-position: center center !important;
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: -1;
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .section-popup-fixed > .container, .section-popup-fixed > [class*="container"] {
+    width: calc(100% - 10px) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+

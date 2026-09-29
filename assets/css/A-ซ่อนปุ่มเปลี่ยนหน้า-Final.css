@@ -1,0 +1,30 @@
+/* 1. บังคับปลดล็อกกล่อง .ref-addons ให้แสดงผลตลอดเวลา */
+
+.reflow-product-list.ref-cards .ref-product .ref-addons, .ref-products.ref-cards .ref-product .ref-addons, [data-reflow-type="product-list"] .ref-addons {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* 2. แต่งปุ่ม Add to Cart ข้างในให้เป็นสีดำทึบ */
+
+.reflow-product-list.ref-cards .ref-product .ref-addons .ref-button, .ref-products.ref-cards .ref-product .ref-addons .ref-button, [data-reflow-type="product-list"] .ref-addons .ref-button {
+  background-color: #212529 !important;
+  background-image: none !important;
+  color: #ffffff !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* 3. สีกรอบและปุ่มตอน Hover */
+
+.reflow-product-list.ref-cards .ref-product .ref-addons .ref-button:hover, .ref-products.ref-cards .ref-product .ref-addons .ref-button:hover, [data-reflow-type="product-list"] .ref-addons .ref-button:hover {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+/* ซ่อนแถบตัวเลขเปลี่ยนหน้าของ Reflow ทั้งแถบ (แต่ JS ยังแอบกดได้ปกติ) */
+
+[data-reflow-type="pagination"], .ref-pagination {
+  display: none !important;
+}
+

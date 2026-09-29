@@ -1,0 +1,68 @@
+/* 1. คุมเลเยอร์ Section ปาดสี */
+
+section:has(.paint-reveal-box) {
+  height: 300vh !important;
+  position: relative !important;
+  z-index: 1 !important;
+  overflow: visible !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* 2. กล่องปักหมุดรูปภาพ */
+
+.paint-reveal-box {
+  position: sticky !important;
+  top: 0 !important;
+  width: 100% !important;
+  height: 100vh !important;
+  overflow: hidden !important;
+  z-index: 1 !important;
+  margin: 0 !important;
+}
+
+/* 3. รูปภาพใบที่ 1 (ภาพฐาน) */
+
+.paint-reveal-box img:first-of-type {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  z-index: 1 !important;
+  will-change: transform;
+}
+
+/* 4. รูปภาพใบที่ 2 (ภาพปาดสี) */
+
+.paint-reveal-box img:last-of-type {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  z-index: 2 !important;
+  clip-path: inset(0 0 100% 0);
+  -webkit-clip-path: inset(0 0 100% 0);
+  will-change: clip-path, transform;
+}
+
+/* --- สำหรับหน้าจอมือถือ (< 768px) --- */
+
+@media (max-width: 767.98px) {
+  .paint-reveal-box img:first-of-type, .paint-reveal-box img:last-of-type {
+    width: auto !important;
+    height: 100vh !important;
+    max-width: none !important;
+  }
+}
+
+/* 5. ดึง Section ด้านล่างและ Footer ให้ลอยขึ้นมาทับต่อกันตามปกติ */
+
+section:has(.paint-reveal-box) ~ section, section:has(.paint-reveal-box) ~ footer, section:has(.paint-reveal-box) ~ div, footer {
+  position: relative !important;
+  z-index: 10 !important;
+}
+

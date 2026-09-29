@@ -1,0 +1,18 @@
+/* ขยายพื้นที่กดของ Navbar Brand ให้ใหญ่ขึ้น กดง่ายไม่หลุด */
+
+.navbar-brand {
+  padding: 25px 20px !important;
+  margin-right: 15px !important;
+  display: flex !important;
+  align-items: center !important;
+  cursor: pointer !important;
+}
+
+/* คุมขนาดรูปโลโก้ SVG ด้านในให้อยู่ในสัดส่วนที่พอดี */
+
+.navbar-brand img {
+  /*height: 40px !important;*/
+  /*width: auto !important;*/
+  /*object-fit: contain !important;*/
+}
+

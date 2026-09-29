@@ -1,0 +1,40 @@
+/* 1. บังคับตัว Section และ Div ให้ยืดความสูงเต็มหน้าจอ (100vh) ไม่โดนบีบแบน */
+
+#top, .hero-pc-bg {
+  width: 100% !important;
+  min-height: 100vh !important;
+  position: relative !important;
+}
+
+/* 2. จัดภาพพื้นหลังให้ขยายเต็มพื้นที่ตามสัดส่วน (Cover) ไร้รอยต่อ */
+
+.hero-pc-bg {
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  overflow: hidden !important;
+}
+
+/* 3. บังคับโมเดล 3D ลอยอยู่กึ่งกลางภาพพอดี */
+
+.hero-pc-bg model-viewer {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  width: 100% !important;
+  height: 60vh !important;
+  max-height: 520px !important;
+  background: transparent !important;
+  --poster-color: transparent !important;
+  z-index: 5 !important;
+}
+
+/* ดันเฉพาะ 3D Model ที่อยู่ใน Div 3D PC เท่านั้น */
+
+/* ดันโมเดล 3D ลงมาทั้งตัว (ขนาดเท่าเดิม ไม่หด และก้นถังขยับลงมาด้วย) */
+
+.pc-3d-wrapper model-viewer {
+  margin-top: 5px !important;
+}
+

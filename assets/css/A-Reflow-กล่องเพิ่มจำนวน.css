@@ -1,0 +1,10 @@
+/* แก้ไขช่องใส่จำนวนสินค้า Reflow HQ ให้ขยายรองรับตัวเลข 2 หลักขึ้นไป */
+
+.ref-quantity-widget input, .ref-quantity-input, .reflow-add-to-cart input {
+  width: 55px !important;
+  min-width: 50px !important;
+  padding-left: 2px !important;
+  padding-right: 2px !important;
+  text-align: center !important;
+}
+
