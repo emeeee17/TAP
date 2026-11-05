@@ -1,0 +1,35 @@
+/* ปรับขนาดราคาของตัวสินค้าให้ใหญ่และเด่นขึ้น */
+
+.ref-price {
+  font-size: 28px !important;
+  font-weight: 800 !important;
+  color: #000000 !important;
+}
+
+/* กฎนี้จะทำงานเฉพาะหน้าจอที่ความกว้างไม่เกิน 768px (มือถือและแท็บเล็ตแนวตั้ง) */
+
+/* 1. ลดขนาดราคาไม่ให้ล้นจอ */
+
+@media (max-width: 768px) {
+  .ref-price {
+    font-size: 18px !important;
+  }
+}
+
+/* 2. เพิ่มช่องว่าง (Padding) ซ้าย-ขวา ไม่ให้เนื้อหาเบียดขอบ Card */
+
+@media (max-width: 768px) {
+  [data-reflow-type="product"] {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+}
+
+/* (เสริม) หากตัวหนังสือด้านบนที่ไม่ได้อยู่ใน Reflow เบียดขอบด้วย ให้เพิ่มระยะใน Card Body */
+
+@media (max-width: 768px) {
+  .card-body {
+    padding: 12px !important;
+  }
+}
+

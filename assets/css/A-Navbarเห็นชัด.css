@@ -1,0 +1,41 @@
+/* 1. สร้างอนิเมชันลำแสงวิ่งหมุนวนรอบตัวหนังสือ (Top-Left -> Top-Right -> Bottom-Right -> Bottom-Left) */
+
+@keyframes laserGlowRun {
+  0% {
+    filter: drop-shadow(-3px -3px 3px #ffffff) drop-shadow(0px 0px 10px rgba(255, 204, 0, 0.9));
+  }
+  25% {
+    filter: drop-shadow(3px -3px 5px #ffffff) drop-shadow(0px 0px 14px rgba(255, 255, 255, 1));
+  }
+  50% {
+    filter: drop-shadow(3px 3px 3px #ffffff) drop-shadow(0px 0px 10px rgba(255, 204, 0, 0.9));
+  }
+  75% {
+    filter: drop-shadow(-3px 3px 5px #ffffff) drop-shadow(0px 0px 14px rgba(255, 255, 255, 1));
+  }
+  100% {
+    filter: drop-shadow(-3px -3px 3px #ffffff) drop-shadow(0px 0px 10px rgba(255, 204, 0, 0.9));
+  }
+}
+
+/* 2. สั่งให้อนิเมชันทำงานเมื่อ Scroll ลงมาจนติดคลาส .nav-scrolled */
+
+.navbar.nav-scrolled svg, .navbar.nav-scrolled .bi, .navbar.nav-scrolled a, .navbar.nav-scrolled .navbar-toggler {
+  color: #000000 !important;
+  animation: laserGlowRun 2s linear infinite !important;
+}
+
+/* 3. (ท่าไม้ตาย) ใส่ Animation Delay เหลื่อมเวลากัน เพื่อให้แสงวิ่งไล่ระดับ ไม่พร้อมกันทั้งแถบ */
+
+.navbar.nav-scrolled .navbar-brand {
+  animation-delay: 0s !important;
+}
+
+.navbar.nav-scrolled .nav-link {
+  animation-delay: 0.3s !important;
+}
+
+.navbar.nav-scrolled [class*="cart"] {
+  animation-delay: 0.6s !important;
+}
+

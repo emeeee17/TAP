@@ -1,0 +1,15 @@
+/* 1. เอฟเฟกต์ขอบจอกระพริบวาบสีเขียวเรืองแสง */
+
+/* 2. ป้ายป็อปอัปเด้งกระแทกตาตรงกลางจอ */
+
+.bi-house {
+  clip-path: inset(0 0 50% 0);
+}
+
+.floating-cart {
+  position: fixed;
+  top: 2vh;
+  right: 2vw;
+  z-index: 9999;
+}
+

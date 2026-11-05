@@ -17,15 +17,19 @@
     <link rel="icon" type="image/png" sizes="192x192" href="assets/img/FavIcon/TAP192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="assets/img/FavIcon/TAP512.png">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;500;600;700&amp;display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,700">
+    <link rel="stylesheet" href="assets/css/Bitter.css">
+    <link rel="stylesheet" href="assets/css/Nunito%20Sans.css">
     <link rel="stylesheet" href="assets/css/animate.min.css">
     <link rel="stylesheet" href="assets/css/stylex.css">
+    <link rel="stylesheet" href="assets/css/A-Add2CartandShake.css">
+    <link rel="stylesheet" href="assets/css/A-Add2cartกระพริบ.css">
     <link rel="stylesheet" href="assets/css/A-AddtocartPlause.css">
     <link rel="stylesheet" href="assets/css/A-BG-3D.css">
+    <link rel="stylesheet" href="assets/css/A-BIG-Price.css">
     <link rel="stylesheet" href="assets/css/A-Modal-Plause.css">
     <link rel="stylesheet" href="assets/css/A-Modal-กระจกใส.css">
     <link rel="stylesheet" href="assets/css/A-NavBarBrand-Bigger.css">
+    <link rel="stylesheet" href="assets/css/A-Navbarเห็นชัด.css">
     <link rel="stylesheet" href="assets/css/A-Reflow-กล่องเพิ่มจำนวน.css">
     <link rel="stylesheet" href="assets/css/A-TAP-BG-Anima.css">
     <link rel="stylesheet" href="assets/css/A-กระจกใสSlideข้าง.css">
@@ -78,14 +82,14 @@
         --stat-color: #FF0000; 
         --map-bg: #f8fafc;
         --text-dark: #1e293b;
-        --nav-clearance: 90px; /* เพิ่มตัวแปรสำหรับระยะหลบ Navbar ด้านบน */
+        --nav-clearance: 90px;
     }
 
     /* Container หลักของระบบแผนที่ */
     .store-locator-wrapper {
         position: relative;
         width: 100%;
-        height: 100vh; /* ใช้ความสูงเต็มจอ */
+        height: 100vh;
         min-height: 500px;
         background-color: var(--map-bg);
         font-family: 'Prompt', sans-serif;
@@ -98,9 +102,63 @@
         -webkit-tap-highlight-color: transparent;
     }
 
+    /* =========================================
+       ส่วนที่เพิ่มใหม่: CSS สำหรับ Loading Screen
+       ========================================= */
+    #map-loader {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--map-bg);
+        z-index: 100; /* ให้อยู่บนสุดตอนโหลด */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+
+    #map-loader.hidden {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+    }
+
+    .spinner {
+        width: 50px;
+        height: 50px;
+        border: 5px solid rgba(255, 204, 0, 0.2); /* พื้นหลังเหลืองอ่อน */
+        border-top: 5px solid #FF0000; /* แดง */
+        border-right: 5px solid #FF6600; /* ส้ม */
+        border-bottom: 5px solid #ffcc00; /* เหลือง */
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin-bottom: 16px;
+    }
+
+    .loader-text {
+        font-size: 16px;
+        font-weight: 500;
+        color: var(--text-dark);
+        animation: pulse 1.5s infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
+    }
+    /* ========================================= */
+
     .search-container {
         position: absolute;
-        top: var(--nav-clearance); /* ขยับลงมาหลบ Navbar */
+        top: var(--nav-clearance);
         left: 50%;
         transform: translateX(-50%);
         z-index: 20;
@@ -137,7 +195,7 @@
 
     #back-btn {
         position: absolute;
-        top: var(--nav-clearance); /* ขยับลงมาเท่ากับกล่อง Search */
+        top: var(--nav-clearance);
         left: 16px;
         z-index: 30;
         background-color: white;
@@ -198,7 +256,7 @@
 
     #sidebar {
         position: absolute;
-        top: 76px; /* ให้ Sidebar เริ่มใต้ Navbar ของ BS Studio */
+        top: 76px;
         right: 0;
         width: 360px;
         height: calc(100% - 76px);
@@ -360,6 +418,15 @@
 </style>
 
 <div class="store-locator-wrapper">
+    <!-- =========================================
+         ส่วนที่เพิ่มใหม่: HTML ของ Loading Screen 
+         ========================================= -->
+    <div id="map-loader">
+        <div class="spinner"></div>
+        <div class="loader-text">กำลังเตรียมแผนที่...</div>
+    </div>
+    <!-- ========================================= -->
+
     <button id="back-btn">← ย้อนกลับ</button>
 
     <div class="search-container">
@@ -642,8 +709,24 @@
             }
         }
 
+        // =========================================
+        // ส่วนที่เพิ่มใหม่: ซ่อน Loading Screen เมื่อวาดแผนที่เสร็จ
+        // =========================================
+        setTimeout(() => {
+            const loader = document.getElementById("map-loader");
+            if (loader) loader.classList.add("hidden");
+        }, 300); // หน่วงนิดหน่อยเพื่อให้แผนที่ render สมบูรณ์
+        // =========================================
+
     }).catch(err => {
         console.error("โหลดข้อมูล GeoJSON แผนที่ล้มเหลว ตรวจสอบการเชื่อมต่ออินเทอร์เน็ต", err);
+        // =========================================
+        // กรณีโหลดไม่สำเร็จ ให้แสดงข้อความแจ้งเตือน
+        // =========================================
+        const loader = document.getElementById("map-loader");
+        if (loader) {
+            loader.innerHTML = `<div style="color: red; font-weight: 600;">เกิดข้อผิดพลาดในการโหลดแผนที่<br><small style="color: #64748b; font-weight: normal;">โปรดตรวจสอบอินเทอร์เน็ตและรีเฟรชใหม่อีกครั้ง</small></div>`;
+        }
     });
 
     function zoomToFeature(d) {
@@ -748,8 +831,10 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="assets/js/multiple-item-carousel-slider-multiple-item-carousel-slider-slider.js"></script>
     <script src="assets/js/stores.js"></script>
-    <script src="assets/js/A-Close-Btn.js"></script>
+    <script src="assets/js/A-Add2cartกระพริบ.js"></script>
+    <script src="assets/js/A-Navbarสว่าง.js"></script>
     <script src="assets/js/A-TAP-BG-Anima.js"></script>
+    <script src="assets/js/A-Textbox-Resize.js"></script>
     <script src="assets/js/CookieConsentComponent-cookieconsent.js"></script>
     <script src="https://cdn.reflowhq.com/v2/toolkit.min.js"></script>
     <script src="assets/js/reflow-modal-Catalogเปิดปิด.js"></script>
